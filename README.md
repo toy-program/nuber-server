@@ -4,3 +4,9 @@
 - GraphQL
 - TypeORM
 - React
+
+## Concept
+
+- graphql-yoga
+- merge-graphql-schema
+- graphql-tools

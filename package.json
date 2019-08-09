@@ -1,0 +1,43 @@
+{
+	"name": "nuber-server",
+	"version": "1.0.0",
+	"description": "Uber cloning with typescript",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon --exec ts-node src/index.ts -e ts,graphql",
+		"pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+		"types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/toy-program/nuber-server.git"
+	},
+	"author": "changhoi",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/toy-program/nuber-server/issues"
+	},
+	"homepage": "https://github.com/toy-program/nuber-server#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"graphql-tools": "^4.0.5",
+		"graphql-yoga": "^1.18.1",
+		"helmet": "^3.20.0",
+		"merge-graphql-schemas": "^1.7.0",
+		"morgan": "^1.9.1"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.5",
+		"@types/helmet": "0.0.43",
+		"@types/morgan": "^1.7.36",
+		"@types/node": "^12.7.1",
+		"babel-runtime": "^6.26.0",
+		"gql-merge": "0.0.6",
+		"graphql-to-typescript": "^0.1.2",
+		"nodemon": "^1.19.1",
+		"ts-node": "^8.3.0",
+		"tslint-config-prettier": "^1.18.0",
+		"typescript": "^3.5.3"
+	}
+}
