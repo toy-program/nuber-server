@@ -21,6 +21,7 @@
 	"homepage": "https://github.com/toy-program/nuber-server#readme",
 	"dependencies": {
 		"cors": "^2.8.5",
+		"dotenv": "^8.0.0",
 		"graphql-tools": "^4.0.5",
 		"graphql-yoga": "^1.18.1",
 		"helmet": "^3.20.0",
