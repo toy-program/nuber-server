@@ -16,8 +16,10 @@ const appOptions: Options = {
 	endpoint: GRAPHQL_ENDPOINT
 };
 
-createConnection(connectionOptions).then(() => {
-	app.start(appOptions, () => {
-		console.log(`Server is on ${PORT}`);
-	});
-});
+createConnection(connectionOptions)
+	.then(() => {
+		app.start(appOptions, () => {
+			console.log(`Server is on ${PORT}`);
+		});
+	})
+	.catch(error => console.log(error));
