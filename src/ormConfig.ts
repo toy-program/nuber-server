@@ -5,7 +5,7 @@ const connectionOptions: ConnectionOptions = {
 	database: "nuber",
 	synchronize: true,
 	logging: true,
-	entities: ["entities/**/*.*"],
+	entities: [__dirname + "entities/*.entity{.ts,.js}"],
 	host: process.env.DB_ENDPOINT || "localhost",
 	port: 5432,
 	username: process.env.DB_USERNAME || "goorm",
