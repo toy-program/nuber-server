@@ -20,3 +20,7 @@ type User {
 	lastLat: Float
 	lastDirection: Float
 }
+
+type Query {
+	user: User
+}

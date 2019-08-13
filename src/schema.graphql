@@ -1,12 +1,16 @@
-type Query {
-  sayBye: String!
-  sayHello(name: String!): SayHelloResponse!
-  user: User
+type Place {
+  id: Int!
+  name: String!
+  lat: Float!
+  lng: Float!
+  address: String!
+  isFavorite: Boolean!
 }
 
-type SayHelloResponse {
-  text: String!
-  error: Boolean!
+type Query {
+  place: Place
+  user: User
+  verification: Verification
 }
 
 type User {
@@ -29,4 +33,14 @@ type User {
   lastLng: Float
   lastLat: Float
   lastDirection: Float
+}
+
+type Verification {
+  id: Int!
+  target: String!
+  payload: String!
+  key: String!
+  used: Boolean!
+  createdAt: String!
+  updatedAt: String!
 }
