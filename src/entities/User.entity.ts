@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import { hash as bcryptHash, compare as bcryptCompare } from "bcrypt";
 
 import { IsEmail } from "class-validator";
 import {
@@ -9,8 +9,15 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 	BeforeInsert,
-	BeforeUpdate
+	BeforeUpdate,
+	ManyToOne,
+	OneToMany
 } from "typeorm";
+
+import Chat from "./Chat.entity";
+import Message from "./Message.entity";
+import Verification from "./Verification.entity";
+import Ride from "./Ride.entity";
 
 const BCRYPT_ROUND = 10;
 
@@ -64,6 +71,21 @@ class User extends BaseEntity {
 	@Column({ type: "double precision", default: 0 })
 	lastOrientation: number;
 
+	@ManyToOne(type => Chat, chat => chat.participants)
+	chat: Chat;
+
+	@OneToMany(type => Message, message => message.author)
+	messages: Message[];
+
+	@OneToMany(type => Verification, verification => verification.user)
+	verifications: Verification[];
+
+	@OneToMany(type => Ride, ride => ride.passenger)
+	rideAsPassenger: Ride[];
+
+	@OneToMany(type => Ride, ride => ride.driver)
+	rideAsDriver: Ride[];
+
 	get fullName(): string {
 		return `${this.firstName} ${this.lastName}`;
 	}
@@ -72,7 +94,7 @@ class User extends BaseEntity {
 	@UpdateDateColumn() updatedAt: string;
 
 	public comparePassword(password: string): Promise<boolean> {
-		return bcrypt.compare(password, this.password);
+		return bcryptCompare(password, this.password);
 	}
 
 	@BeforeInsert()
@@ -85,7 +107,7 @@ class User extends BaseEntity {
 	}
 
 	private hashPassword(password: string): Promise<string> {
-		return bcrypt.hash(password, BCRYPT_ROUND);
+		return bcryptHash(password, BCRYPT_ROUND);
 	}
 }
 

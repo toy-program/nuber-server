@@ -9,7 +9,8 @@
 		"object-literal-sort-keys": false,
 		"ordered-imports": true,
 		"interface-name": false,
-		"strict-null-checks": false
+		"strict-null-checks": false,
+		"experimentalDecorators": true
 	},
 	"rulesDirectory": []
 }
