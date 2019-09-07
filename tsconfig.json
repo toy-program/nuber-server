@@ -16,7 +16,7 @@
 		"stripInternal": true,
 		"pretty": true,
 		"strictNullChecks": true,
-		"noUnusedLocals": true,
+		"noUnusedLocals": false,
 		"downlevelIteration": true
 	},
 	"exclude": [

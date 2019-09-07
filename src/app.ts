@@ -1,7 +1,7 @@
 import { GraphQLServer } from "graphql-yoga";
-import cors from "cors";
-import logger from "morgan";
-import helmet from "helmet";
+import * as cors from "cors";
+import * as logger from "morgan";
+import * as helmet from "helmet";
 import schema from "./schema";
 
 class App {

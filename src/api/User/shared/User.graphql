@@ -5,6 +5,7 @@ type User {
 	lastName: String!
 	age: Int
 	password: String
+	facebookId: String
 	phoneNumber: String
 	profilePhoto: String
 	verificaitons: [Verification]
