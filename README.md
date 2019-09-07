@@ -9,16 +9,16 @@
 
 ### Public Resolvers:
 
-- [ ] Login & Signup with Facebook
-- [ ] Login & Signup with Email
-- [ ] Starts Phone Number Verification (Send Message)
-- [ ] Complete Phone Number Verification
+- [x] Login & Signup with Facebook
+- [x] Login & Signup with Email
+- [x] Starts Phone Number Verification (Send Message)
+- [x] Complete Phone Number Verification
 ---
 
 ### Authentication:
 
 - [ ] Verify JWT
-- [ ] Generate JWT
+- [x] Generate JWT
 ---
 
 ### Private Resolvers:
