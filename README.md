@@ -15,6 +15,12 @@
 - [ ] Complete Phone Number Verification
 ---
 
+### Authentication:
+
+- [ ] Verify JWT
+- [ ] Generate JWT
+---
+
 ### Private Resolvers:
 
 - [ ] Verify Email
