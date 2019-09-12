@@ -26,6 +26,7 @@ type Place {
 
 type Query {
   place: Place
+  GetMyProfile: GetMyProfileResponse!
   user: User
   verification: Verification
 }
@@ -56,8 +57,8 @@ type EmailSignInResponse {
 
 type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, profilePhoto: String!, age: Int!): EmailSignUpResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String, facebookId: String!): FacebookConnectResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookId: String!): FacebookConnectResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
 }
@@ -65,7 +66,6 @@ type Mutation {
 type EmailSignUpResponse {
   ok: Boolean!
   error: String
-  token: String
 }
 
 type FacebookConnectResponse {
@@ -74,9 +74,15 @@ type FacebookConnectResponse {
   token: String
 }
 
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
 type User {
   id: Int!
-  email: String
+  email: String!
   firstName: String!
   lastName: String!
   age: Int
@@ -109,7 +115,6 @@ type StartPhoneVerificationResponse {
 type CompletePhoneVerificationResponse {
   ok: Boolean!
   error: String
-  token: String
 }
 
 type Verification {

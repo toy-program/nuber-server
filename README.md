@@ -17,13 +17,15 @@
 
 ### Authentication:
 
-- [ ] Verify JWT
+- [x] Verify JWT
 - [x] Generate JWT
 ---
 
 ### Private Resolvers:
 
 - [ ] Verify Email
+- [ ] Request Email Verification
+- [ ] Complete Email Verfication
 - [ ] Get My Profile
 - [ ] Update My Profile
 - [ ] Add Place

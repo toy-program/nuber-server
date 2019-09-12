@@ -15,29 +15,26 @@ const resolvers: Resolvers = {
 		): Promise<CompletePhoneVerificationResponse> => {
 			const { phoneNumber, key } = args;
 			try {
-				const verfication = await Verification.findOne({
+				const verification = await Verification.findOne({
 					payload: phoneNumber,
 					key
 				});
-				if (!verfication) throw new Error("Verification key is not valid");
+				if (!verification) throw new Error("Verification key is not valid");
 
 				const user = await User.findOne({ phoneNumber });
-				if (!user) throw new Error("There is no user with that phone number");
+				if (user) throw new Error("This phone number is already used");
 
-				user.verifiedPhonenNumber = true;
-				user.save();
+				verification.verified = true;
+				verification.save();
 
-				const token = createJWT(user.id);
 				return {
 					ok: true,
-					error: null,
-					token
+					error: null
 				};
 			} catch (e) {
 				return {
 					ok: false,
-					error: e.message,
-					token: null
+					error: e.message
 				};
 			}
 		}

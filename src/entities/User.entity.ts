@@ -16,7 +16,6 @@ import {
 
 import Chat from "./Chat.entity";
 import Message from "./Message.entity";
-import Verification from "./Verification.entity";
 import Ride from "./Ride.entity";
 
 const BCRYPT_ROUND = 10;
@@ -25,9 +24,9 @@ const BCRYPT_ROUND = 10;
 class User extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number;
 
-	@Column({ type: "text", nullable: true, unique: true })
+	@Column({ type: "text", unique: true })
 	@IsEmail()
-	email: string | null;
+	email: string;
 
 	@Column({ type: "boolean", default: false })
 	verifiedEmail: boolean;

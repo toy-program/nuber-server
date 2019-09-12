@@ -16,16 +16,16 @@ const resolvers: Resolvers = {
 			try {
 				const user = await User.findOne({ email });
 				if (!user) throw new Error("No User found with that Email");
-
+				if (!user.verifiedEmail) throw new Error("Verify your email first");
 				const checkPassword = await user.comparePassword(password);
-				if (checkPassword) {
-					const token = createJWT(user.id);
-					return {
-						ok: true,
-						error: null,
-						token
-					};
-				} else throw new Error("Wrong Password");
+				if (!checkPassword) throw new Error("Wrong Password");
+
+				const token = createJWT(user.id);
+				return {
+					ok: true,
+					error: null,
+					token
+				};
 			} catch (e) {
 				return {
 					ok: false,

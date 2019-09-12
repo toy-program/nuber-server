@@ -7,7 +7,6 @@
 		"no-console": false,
 		"member-access": false,
 		"object-literal-sort-keys": false,
-		"ordered-imports": true,
 		"interface-name": false,
 		"strict-null-checks": false,
 		"experimentalDecorators": true
