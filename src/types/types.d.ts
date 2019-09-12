@@ -5,3 +5,5 @@ export type rideStatus =
 	| "CANCELED"
 	| "REQUESTING"
 	| "ONROUTE";
+
+export type verificationPurpose = "SIGNUP" | "PROFILE";

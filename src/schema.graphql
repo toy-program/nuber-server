@@ -49,18 +49,25 @@ type Ride {
   updatedAt: String!
 }
 
+type CompleteEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookId: String!): FacebookConnectResponse!
+  RequestEmailVerification: RequestEmailVerificationResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
+}
+
 type EmailSignInResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
-  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookId: String!): FacebookConnectResponse!
-  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
-  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
 }
 
 type EmailSignUpResponse {
@@ -80,6 +87,11 @@ type GetMyProfileResponse {
   user: User
 }
 
+type RequestEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
 type User {
   id: Int!
   email: String!
@@ -95,7 +107,7 @@ type User {
   rideAsDriver: [Ride]
   createdAt: String!
   updatedAt: String
-  fullName: String
+  fullName: String!
   messages: [Message]
   verifiedEmail: Boolean!
   verifiedPhoneNumber: Boolean!
@@ -120,6 +132,7 @@ type CompletePhoneVerificationResponse {
 type Verification {
   id: Int!
   target: String!
+  purpose: String!
   payload: String!
   key: String!
   verified: Boolean!

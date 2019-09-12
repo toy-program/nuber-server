@@ -1,6 +1,7 @@
 type Verification {
 	id: Int!
 	target: String!
+	purpose: String!
 	payload: String!
 	key: String!
 	verified: Boolean!

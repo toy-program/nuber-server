@@ -23,9 +23,9 @@
 
 ### Private Resolvers:
 
-- [ ] Verify Email
-- [ ] Request Email Verification
-- [ ] Complete Email Verfication
+- [x] Verify Email
+- [x] Request Email Verification
+- [x] Complete Email Verfication
 - [ ] Get My Profile
 - [ ] Update My Profile
 - [ ] Add Place

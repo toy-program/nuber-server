@@ -17,6 +17,8 @@ const resolvers: Resolvers = {
 			try {
 				const verification = await Verification.findOne({
 					payload: phoneNumber,
+					target: "PHONE",
+					purpose: "SIGNUP",
 					key
 				});
 				if (!verification) throw new Error("Verification key is not valid");

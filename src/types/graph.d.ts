@@ -1,4 +1,4 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  message: [Message]\n  participants: [User]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  author: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFavorite: Boolean!\n}\n\ntype Query {\n  place: Place\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n  verification: Verification\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  duration: String!\n  distance: String!\n  driver: User!\n  passenger: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookId: String!): FacebookConnectResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype User {\n  id: Int!\n  email: String!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  facebookId: String\n  phoneNumber: String\n  profilePhoto: String\n  verificaitons: [Verification]\n  rideAsPassenger: [Ride]\n  rideAsDriver: [Ride]\n  createdAt: String!\n  updatedAt: String\n  fullName: String\n  messages: [Message]\n  verifiedEmail: Boolean!\n  verifiedPhoneNumber: Boolean!\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastDirection: Float\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  message: [Message]\n  participants: [User]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  author: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFavorite: Boolean!\n}\n\ntype Query {\n  place: Place\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n  verification: Verification\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  duration: String!\n  distance: String!\n  driver: User!\n  passenger: User!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String!, facebookId: String!): FacebookConnectResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  facebookId: String\n  phoneNumber: String\n  profilePhoto: String\n  verificaitons: [Verification]\n  rideAsPassenger: [Ride]\n  rideAsDriver: [Ride]\n  createdAt: String!\n  updatedAt: String\n  fullName: String!\n  messages: [Message]\n  verifiedEmail: Boolean!\n  verifiedPhoneNumber: Boolean!\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastDirection: Float\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  purpose: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -38,7 +38,7 @@ export interface User {
   rideAsDriver: Array<Ride> | null;
   createdAt: string;
   updatedAt: string | null;
-  fullName: string | null;
+  fullName: string;
   messages: Array<Message> | null;
   verifiedEmail: boolean;
   verifiedPhoneNumber: boolean;
@@ -53,6 +53,7 @@ export interface User {
 export interface Verification {
   id: number;
   target: string;
+  purpose: string;
   payload: string;
   key: string;
   verified: boolean;
@@ -96,11 +97,17 @@ export interface Chat {
 }
 
 export interface Mutation {
+  CompleteEmailVerification: CompleteEmailVerificationResponse;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   FacebookConnect: FacebookConnectResponse;
+  RequestEmailVerification: RequestEmailVerificationResponse;
   StartPhoneVerification: StartPhoneVerificationResponse;
   CompletePhoneVerification: CompletePhoneVerificationResponse;
+}
+
+export interface CompleteEmailVerificationMutationArgs {
+  key: string;
 }
 
 export interface EmailSignInMutationArgs {
@@ -134,6 +141,11 @@ export interface CompletePhoneVerificationMutationArgs {
   key: string;
 }
 
+export interface CompleteEmailVerificationResponse {
+  ok: boolean;
+  error: string | null;
+}
+
 export interface EmailSignInResponse {
   ok: boolean;
   error: string | null;
@@ -149,6 +161,11 @@ export interface FacebookConnectResponse {
   ok: boolean;
   error: string | null;
   token: string | null;
+}
+
+export interface RequestEmailVerificationResponse {
+  ok: boolean;
+  error: string | null;
 }
 
 export interface StartPhoneVerificationResponse {

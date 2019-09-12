@@ -20,6 +20,8 @@ const resolvers: Resolvers = {
 
 				const phoneVerification = await Verification.findOne({
 					payload: args.phoneNumber,
+					target: "EMAIL",
+					purpose: "SIGNUP",
 					verified: true
 				});
 				if (!phoneVerification)
@@ -30,7 +32,8 @@ const resolvers: Resolvers = {
 
 				const emailVerification = await Verification.create({
 					payload: newUser.email,
-					target: "EMAIL"
+					target: "EMAIL",
+					purpose: "SIGNUP"
 				}).save();
 				await sendVerificationEmail(
 					newUser.fullName,

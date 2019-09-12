@@ -23,7 +23,8 @@ const resolvers: Resolvers = {
 
 				const newVerification = await Verification.create({
 					payload: phoneNumber,
-					target: "PHONE"
+					target: "PHONE",
+					purpose: "SIGNUP"
 				}).save();
 				await sendVerificationSMS(newVerification.payload, newVerification.key);
 

@@ -8,17 +8,20 @@ import {
 	BeforeInsert
 } from "typeorm";
 
-import { verificationTarget } from "../types/types";
-
-const PHONE = "PHONE";
-const EMAIL = "EMAIL";
+import { verificationTarget, verificationPurpose } from "../types/types";
+import { createEmailKey, createPhoneKey } from "../utils/createVerificationKey";
+const TARGET = ["PHONE", "EMAIL"];
+const PURPOSE = ["SIGNUP", "PROFILE"];
 
 @Entity()
 class Verification extends BaseEntity {
 	@PrimaryGeneratedColumn() id: number;
 
-	@Column({ type: "text", enum: [PHONE, EMAIL] })
+	@Column({ type: "text", enum: TARGET })
 	target: verificationTarget;
+
+	@Column({ type: "text", enum: PURPOSE })
+	purpose: verificationPurpose;
 
 	@Column({ type: "text" })
 	payload: string;
@@ -35,12 +38,10 @@ class Verification extends BaseEntity {
 
 	@BeforeInsert()
 	private createKey(): void {
-		if (this.target === PHONE) {
-			this.key = Math.floor(Math.random() * 100000).toString();
+		if (this.target === TARGET[0]) {
+			this.key = createPhoneKey();
 		} else {
-			this.key = Math.random()
-				.toString(36)
-				.substring(2);
+			this.key = createEmailKey();
 		}
 	}
 }
